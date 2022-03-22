@@ -1,0 +1,11 @@
+/storage/logs/*.log
+/vendor
+/.git
+/.github
+/.env.example
+/.env
+/.gitignore
+/.php-cs-fixer.cache
+/.php-cs-fixer.php
+/phpstan.neon
+/phpunit.xml
