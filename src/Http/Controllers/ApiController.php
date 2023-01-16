@@ -2,7 +2,6 @@
 
 namespace Jeoip\Server\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Jeoip\Contracts\Exceptions\IQueryException;
 use Jeoip\Contracts\IGeoIPService;
 use Laravel\Lumen\Routing\Controller;
@@ -19,15 +18,15 @@ class ApiController extends Controller
     /**
      * @return mixed
      */
-    public function query(string $ip = null, Request $request)
+    public function query(string $ip)
     {
         try {
             /**
              * @var array{string,mixed}
              */
             $data = $this->goeIPService->query($ip)->jsonSerialize();
-            $data['user_agent'] = $request->userAgent();
-            $data['hostname'] = $request->getHttpHost();
+            $data['user_agent'] = request()->userAgent();
+            $data['hostname'] = request()->getHttpHost();
             $data['status'] = true;
 
             return $data;
@@ -43,21 +42,21 @@ class ApiController extends Controller
     /**
      * @return string
      */
-    public function ip(Request $request)
+    public function ip()
     {
-        return $request->ip();
+        return request()->ip();
     }
 
     /**
      * @return string
      */
-    public function country(string $ip = null, Request $request)
+    public function country(string $ip = null)
     {
         try {
             /**
              * @var string
              */
-            $ip = $ip ?? $request->ip();
+            $ip = $ip ?? request()->ip();
             $data = $this->goeIPService->query($ip)->getCountry();
 
             return $data;
@@ -73,13 +72,13 @@ class ApiController extends Controller
     /**
      * @return string
      */
-    public function countryCode(string $ip = null, Request $request)
+    public function countryCode(string $ip = null)
     {
         try {
             /**
              * @var string
              */
-            $ip = $ip ?? $request->ip();
+            $ip = $ip ?? request()->ip();
             $data = $this->goeIPService->query($ip)->getCountryCode();
 
             return $data;
@@ -95,13 +94,13 @@ class ApiController extends Controller
     /**
      * @return string
      */
-    public function city(string $ip = null, Request $request)
+    public function city(string $ip = null)
     {
         try {
             /**
              * @var string
              */
-            $ip = $ip ?? $request->ip();
+            $ip = $ip ?? request()->ip();
             $data = $this->goeIPService->query($ip)->getCity();
 
             return $data;
@@ -117,13 +116,13 @@ class ApiController extends Controller
     /**
      * @return string
      */
-    public function asn(string $ip = null, Request $request)
+    public function asn(string $ip = null)
     {
         try {
             /**
              * @var string
              */
-            $ip = $ip ?? $request->ip();
+            $ip = $ip ?? request()->ip();
             $data = $this->goeIPService->query($ip)->getAsn();
 
             return $data;
