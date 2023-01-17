@@ -26,7 +26,7 @@ class ApiController extends Controller
              */
             $data = $this->goeIPService->query($ip)->jsonSerialize();
             $data['user_agent'] = request()->userAgent();
-            $data['hostname'] = request()->getHttpHost();
+            $data['hostname'] = \gethostbyaddr($ip);
             $data['status'] = true;
 
             return $data;
