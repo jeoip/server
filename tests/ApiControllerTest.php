@@ -40,7 +40,7 @@ class ApiControllerTest extends TestCase
         $this->assertResponseStatus(200);
 
         // test ipv6 query
-        $this->json('GET', route('ip.info', ['ip' => '::ffff:1.0.0.1']))
+        $this->json('GET', route('ip.info', ['ip' => '2001:0000:0000:0000:0000:0000:0000:0000']))
             ->seeJsonContains([
                 'status' => true,
             ])
@@ -78,43 +78,46 @@ class ApiControllerTest extends TestCase
         $this->assertResponseStatus(200);
 
         // test ipv6 query
-        $this->get(route('ip.country', ['ip' => '::ffff:1.0.0.1']));
+        $this->get(route('ip.country', ['ip' => '2001:0000:0000:0000:0000:0000:0000:0000']));
         $this->assertResponseStatus(200);
     }
 
     public function testCountryCode()
     {
         SubnetV4::factory()->create();
+        SubnetV6::factory()->create();
 
         $this->get(route('ip.countryCode', ['ip' => '1.1.1.1']));
         $this->assertResponseStatus(200);
 
         // test ipv6 query
-        $this->get(route('ip.countryCode', ['ip' => '::ffff:1.0.0.1']));
+        $this->get(route('ip.countryCode', ['ip' => '2001:0000:0000:0000:0000:0000:0000:0000']));
         $this->assertResponseStatus(200);
     }
 
     public function testCity()
     {
         SubnetV4::factory()->create();
+        SubnetV6::factory()->create();
 
         $this->get(route('ip.city', ['ip' => '1.1.1.1']));
         $this->assertResponseStatus(200);
 
         // test ipv6 query
-        $this->get(route('ip.city', ['ip' => '::ffff:1.0.0.1']));
+        $this->get(route('ip.city', ['ip' => '2001:0000:0000:0000:0000:0000:0000:0000']));
         $this->assertResponseStatus(200);
     }
 
     public function testAsn()
     {
         SubnetV4::factory()->create();
+        SubnetV6::factory()->create();
 
         $this->get(route('ip.asn', ['ip' => '1.1.1.1']));
         $this->assertResponseStatus(200);
 
         // test ipv6 query
-        $this->get(route('ip.asn', ['ip' => '::ffff:1.0.0.1']));
+        $this->get(route('ip.asn', ['ip' => '2001:0000:0000:0000:0000:0000:0000:0000']));
         $this->assertResponseStatus(200);
     }
 }
