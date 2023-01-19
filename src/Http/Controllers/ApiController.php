@@ -8,19 +8,17 @@ use Laravel\Lumen\Routing\Controller;
 
 class ApiController extends Controller
 {
-    protected IGeoIPService $goeIPService;
-
-    public function __construct(IGeoIPService $goeIPService)
+    public function __construct(protected IGeoIPService $goeIPService)
     {
-        $this->goeIPService = $goeIPService;
     }
 
-    /**
-     * @return mixed
-     */
-    public function query(string $ip)
+    public function query(?string $ip = null)
     {
         try {
+            if ($ip === null) {
+                $ip = request()->ip();
+            }
+
             /**
              * @var array{string,mixed}
              */
@@ -47,10 +45,7 @@ class ApiController extends Controller
         return request()->ip();
     }
 
-    /**
-     * @return string
-     */
-    public function country(string $ip = null)
+    public function country(?string $ip = null)
     {
         try {
             /**
@@ -69,10 +64,7 @@ class ApiController extends Controller
         }
     }
 
-    /**
-     * @return string
-     */
-    public function countryCode(string $ip = null)
+    public function countryCode(?string $ip = null)
     {
         try {
             /**
@@ -91,10 +83,7 @@ class ApiController extends Controller
         }
     }
 
-    /**
-     * @return string
-     */
-    public function city(string $ip = null)
+    public function city(?string $ip = null)
     {
         try {
             /**
@@ -113,10 +102,7 @@ class ApiController extends Controller
         }
     }
 
-    /**
-     * @return string
-     */
-    public function asn(string $ip = null)
+    public function asn(?string $ip = null)
     {
         try {
             /**
