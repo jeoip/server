@@ -2,12 +2,11 @@
 
 namespace Jeoip\Server\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 
 class CorsMiddleware
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, \Closure $next)
     {
         $headers = [
             'Access-Control-Allow-Origin' => '*',

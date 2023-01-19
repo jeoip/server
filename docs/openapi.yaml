@@ -1,0 +1,156 @@
+openapi: 3.0.0
+x-stoplight:
+  id: gfu5l3sv075de
+info:
+  title: jeoip.yml
+  version: '1.0'
+  description: All webservices realated to jesoip service
+  license:
+    name: MIT License
+    url: 'https://raw.githubusercontent.com/jeoip/server/master/LICENSE'
+servers:
+  - url: 'https://jeoip.ir/api'
+paths:
+  '/{ip}':
+    parameters:
+      - schema:
+          type: string
+        name: ip
+        in: path
+        required: true
+        description: ipv4 or ipv6
+    get:
+      summary: Get IP Info
+      tags: []
+      responses:
+        '200':
+          description: IP Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  countryCode:
+                    type: string
+                  subnet:
+                    type: string
+                  country:
+                    type: string
+                  country_eu:
+                    type: boolean
+                  region:
+                    type: string
+                  city:
+                    type: string
+                  asn:
+                    type: integer
+                  asn_org:
+                    type: string
+                  latitude:
+                    type: number
+                    format: float
+                  longitude:
+                    type: number
+                    format: float
+                  zipcode:
+                    type: string
+                  timezone:
+                    type: string
+                  user_agent:
+                    type: string
+                  hostname:
+                    type: string
+                  status:
+                    type: boolean
+              examples: {}
+        '404':
+          description: User Not Found
+      operationId: ip
+      description: Retrieve the information of the ip
+  /ip:
+    parameters: []
+    get:
+      summary: ''
+      operationId: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      description: return agent ip
+  '/{ip?}/city':
+    parameters:
+      - schema:
+          type: string
+        name: ip?
+        in: path
+        description: ipv4 or ipv6
+    get:
+      summary: ''
+      operationId: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      description: Returns the city corresponding to the IP
+  '/{ip?}/country':
+    parameters:
+      - schema:
+          type: string
+        name: ip?
+        in: path
+        description: ipv4 or ipv6
+    get:
+      summary: ''
+      operationId: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      description: Returns the country corresponding to the IP
+  '/{ip?}/country-code':
+    parameters:
+      - schema:
+          type: string
+        name: ip?
+        in: path
+        description: ipv4 or ipv6
+    get:
+      summary: ''
+      operationId: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      description: Returns the country-code corresponding to the IP
+  '/{ip?}/asn':
+    parameters:
+      - schema:
+          type: string
+        name: ip?
+        in: path
+        description: ipv4 or ipv6
+    get:
+      summary: ''
+      operationId: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      description: Returns the asn corresponding to the IP
+components:
+  schemas: {}
